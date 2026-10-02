@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIER- KPITRA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  </head>
+  <body>
+    <section class="login-screen" id="login-screen" aria-label="Login">
+      <div class="login-panel">
+        <div class="login-visual">
+          <div class="login-brand">
+            <span>SIER</span>
+            <strong>KPITRA</strong>
+          </div>
+          <div class="login-visual-copy">
+            <span>Direktorat Operasional</span>
+            <h1>WELCOME BACK</h1>
+            <p>Monitoring KPI, tracker divisi, monev, dan action items dalam satu ruang kerja.</p>
+          </div>
+        </div>
+        <div class="login-form-wrap">
+          <form class="login-card" id="login-form">
+            <div class="login-copy">
+              <h1>Login Account</h1>
+              <p>Masuk sesuai role untuk melanjutkan.</p>
+            </div>
+            <label class="login-field">
+              <span>Email</span>
+              <div><i data-lucide="mail"></i><input id="login-email" type="email" value="direksi@sier.co.id" required /></div>
+            </label>
+            <label class="login-field">
+              <span>Password</span>
+              <div><i data-lucide="lock-keyhole"></i><input id="login-password" type="password" value="password" required /></div>
+            </label>
+            <label class="login-field">
+              <span>Role</span>
+              <div><i data-lucide="shield-user"></i><select id="login-role">
+                <option>Direksi</option>
+                <option>Super Admin</option>
+                <option>Kepala Divisi</option>
+                <option>Admin/Sekretaris</option>
+              </select></div>
+            </label>
+            <button type="submit" class="login-submit"><i data-lucide="log-in"></i><span>Masuk</span></button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <div class="brand">
+        <span>SIER</span>
+        <strong>KPITRA
+        </strong>
+        <button class="sidebar-toggle" id="sidebar-toggle" title="Collapse sidebar"><i data-lucide="panel-left-close"></i></button>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></button>
+      </nav>
+
+      <div class="nav-group open">
+        <button class="group-toggle" type="button"><span>Kinerja</span><i data-lucide="chevron-down"></i></button>
+        <nav class="nav group-content">
+          <button class="nav-item" data-view="dirops"><i data-lucide="bar-chart-3"></i><span>KPI DirOps</span></button>
+          <button class="nav-item" data-view="kolegial"><i data-lucide="users-round"></i><span>KPI Kolegial</span></button>
+        </nav>
+      </div>
+
+      <div class="nav-group open">
+        <button class="group-toggle" type="button"><span>Monitoring</span><i data-lucide="chevron-down"></i></button>
+        <nav class="nav group-content">
+          <button class="nav-item" data-view="tracker"><i data-lucide="list-checks"></i><span>Tracker Divisi</span></button>
+          <button class="nav-item" data-view="monev"><i data-lucide="clipboard-check"></i><span>Monev Danareksa</span></button>
+          <button class="nav-item" data-view="actions"><i data-lucide="square-check-big"></i><span>Action Items</span></button>
+        </nav>
+      </div>
+
+      <div class="nav-group open">
+        <button class="group-toggle" type="button"><span>Administrasi</span><i data-lucide="chevron-down"></i></button>
+        <nav class="nav group-content">
+          <button class="nav-item" data-view="priority"><i data-lucide="triangle-alert"></i><span>Isu Prioritas</span></button>
+          <button class="nav-item" data-view="reports"><i data-lucide="file-text"></i><span>Laporan</span></button>
+          <button class="nav-item" data-view="master"><i data-lucide="settings-2"></i><span>Setting KPI</span></button>
+          <button class="nav-item" data-view="users"><i data-lucide="shield-user"></i><span>User & Role</span></button>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="shell">
+      <header class="topbar">
+        <div class="search"><i data-lucide="search"></i><input id="global-search" placeholder="Search KPI, agenda, PIC..." /></div>
+        <div class="top-actions">
+          <select id="role-switch" class="role-switch" title="Mode akses">
+            <option>Super Admin</option>
+            <option>Direksi</option>
+            <option>Kepala Divisi</option>
+            <option>Admin/Sekretaris</option>
+          </select>
+          <select id="division-switch" class="role-switch" title="Divisi Kepala Divisi" hidden>
+            <option>KSR</option>
+            <option>KPR/PIER</option>
+            <option>JSP</option>
+            <option>Logistik</option>
+          </select>
+          <div class="notification-wrap">
+            <button class="bell" id="notification-trigger" type="button" aria-expanded="false"><i data-lucide="bell"></i><span id="notification-count">0</span></button>
+            <div class="notification-panel" id="notification-panel" aria-hidden="true"></div>
+          </div>
+          <div class="profile-wrap">
+            <button class="profile-trigger" id="profile-trigger" type="button" title="Buka profil" aria-expanded="false">
+              <span class="avatar"><span id="profile-initials">DP</span></span>
+              <span class="top-profile-text">
+                <strong id="top-profile-name">Dirops PT SIER</strong>
+                <small id="top-profile-role">Admin/Sekretaris</small>
+              </span>
+            </button>
+            <div class="profile-menu" id="profile-menu" aria-hidden="true">
+              <div class="profile-summary">
+                <strong id="profile-name">Dirops PT SIER</strong>
+                <span id="profile-email">sekretariat@pt-sier.co.id</span>
+                <small id="profile-role">Admin/Sekretaris</small>
+              </div>
+              <button type="button" class="profile-menu-item" data-edit-profile><i data-lucide="user-round-pen"></i><span>Edit Profil</span></button>
+              <button type="button" class="profile-menu-item danger" data-logout><i data-lucide="log-out"></i><span>Logout</span></button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="dashboard" class="view active"></section>
+      <section id="dirops" class="view"></section>
+      <section id="kolegial" class="view"></section>
+      <section id="tracker" class="view"></section>
+      <section id="monev" class="view"></section>
+      <section id="actions" class="view"></section>
+      <section id="priority" class="view"></section>
+      <section id="reports" class="view"></section>
+      <section id="master" class="view"></section>
+      <section id="users" class="view"></section>
+    </main>
+
+    <div class="modal" id="crud-modal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal></div>
+      <form class="modal-card" id="crud-form">
+        <div class="modal-head">
+          <div><small id="modal-context">Form</small><h2 id="modal-title">Tambah Data</h2></div>
+          <button type="button" class="icon-btn" data-close-modal>×</button>
+        </div>
+        <div class="form-grid" id="form-fields"></div>
+        <div class="modal-actions">
+          <button type="button" class="soft-btn" data-close-modal>Batal</button>
+          <button type="submit" class="primary-btn">Simpan</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal" id="profile-modal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-profile></div>
+      <form class="modal-card profile-modal-card" id="profile-form">
+        <div class="modal-head">
+          <div><small>Profil Pengguna</small><h2>Edit Profil</h2></div>
+          <button type="button" class="icon-btn" data-close-profile aria-label="Tutup">×</button>
+        </div>
+        <div class="form-grid">
+          <label class="field"><span>Nama</span><input id="profile-name-input" name="name" required /></label>
+          <label class="field"><span>Email</span><input id="profile-email-input" name="email" type="email" required /></label>
+          <label class="field"><span>Role</span><input id="profile-role-input" name="role" disabled /></label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="soft-btn" data-close-profile>Batal</button>
+          <button type="submit" class="primary-btn">Simpan Profil</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="save-toast" class="save-toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
